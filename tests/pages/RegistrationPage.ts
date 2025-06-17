@@ -8,6 +8,8 @@ export class RegistrationPage {
   readonly passwordInput: Locator;
   readonly registerButton: Locator;
   readonly loginHeaderButton: Locator;
+  readonly successRegistrationMessage: Locator;
+  readonly alreadyRegisteredMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +19,9 @@ export class RegistrationPage {
     this.passwordInput = page.locator('input[name="password"]');
     this.registerButton = page.getByTestId('boton-registrarse');
     this.loginHeaderButton = page.getByTestId('boton-login-header-signup');
+    this.successRegistrationMessage = page.getByRole('alert').filter({ hasText: 'Registro exitoso!'});
+    this.alreadyRegisteredMessage = page.getByRole('alert').filter({ hasText: 'Email already in use'});
+
   }
 
   async getAllRegistrationPage()
@@ -42,11 +47,15 @@ export class RegistrationPage {
     await this.passwordInput.fill(password);
   }
 
-  async getRegisterButton(): Promise<void> {
+  async getRegisterButton() {
     await expect(this.registerButton).toBeEnabled();
     await this.registerButton.click();
   }
-  async waitForRegistrationSuccessMessage(): Promise<void> {
-    await this.page.locator('text=Registro exitoso!').waitFor();
+  async waitForRegistrationSuccessMessage() {
+    await expect(this.successRegistrationMessage).toBeVisible();
+
+  }
+    async waitForAlreadyRegistrationSuccessMessage(){
+    await expect(this.alreadyRegisteredMessage).toBeVisible();
   }
 }
