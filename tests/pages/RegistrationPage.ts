@@ -59,3 +59,5 @@ export class RegistrationPage {
     await expect(this.alreadyRegisteredMessage).toBeVisible();
   }
 }
+
+export default RegistrationPage;

@@ -5,11 +5,15 @@ export class LoginPage{
     readonly passwordInput:Locator;
     readonly loginButton:Locator;
     readonly loginHeaderButton:Locator;
+    readonly registerButton:Locator;
+
+
     constructor(page: Page) {
       this.page = page;
       this.emailInput = page.locator('input[name="email"]');
       this.passwordInput = page.locator('input[name="password"]');
       this.loginButton = page.getByTestId('boton-login');
+      this.registerButton = page.getByTestId('boton-signup-header');
     }
     async getAllLoginPage(){
         await expect(this.emailInput).toBeVisible();
@@ -26,4 +30,25 @@ export class LoginPage{
       const invalidCredentialsMessage = this.page.getByRole('alert').filter({ hasText: 'Invalid credentials' });
       await expect(invalidCredentialsMessage).toBeVisible();
     } 
-}
+    async getEmailValidationMessage() {
+        const emailInput = await this.page.$('input[type="email"]');
+        if (!emailInput) throw new Error('Email input not found');
+        return await emailInput.evaluate(input => (input as HTMLInputElement).validationMessage);
+    }
+    async getPasswordValidationMessage() {
+        const passwordInput = await this.page.$('input[type="password"]');
+        if (!passwordInput) throw new Error('Password input not found');
+        return await passwordInput.evaluate(input => (input as HTMLInputElement).validationMessage);
+    }
+    async getEmailAtSignValidationMessage() {
+        const emailInput = await this.page.$('input[type="email"]');
+        if (!emailInput) throw new Error('Email input not found');
+        return await emailInput.evaluate(input => (input as HTMLInputElement).validationMessage);
+    }
+    async getRegisterButton() {
+      await expect(this.registerButton).toBeVisible();
+      await this.registerButton.click();
+    }
+  }
+
+export default LoginPage;
