@@ -37,7 +37,7 @@ test('TC-5 Verificacion de registro exitoso', async ({ page }) => {
   await registrationPage.waitForRegistrationSuccessMessage();
 }); 
 
-test('TC-5 Verificacion de email ya registrado', async ({ page }) => {
+test('TC-6 Verificacion de email ya registrado', async ({ page }) => {
   await registrationPage.fillRegistrationForm(Register.username, Register.lastname, Register.email, Register.password);
   await registrationPage.getRegisterButton();
   await registrationPage.waitForAlreadyRegistrationSuccessMessage();
