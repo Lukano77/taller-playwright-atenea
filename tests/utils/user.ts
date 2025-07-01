@@ -1,8 +1,8 @@
 export const Register = {
- username: 'lucianotest',
-  lastname: 'Test',
-  email: 'test123@test.com',
-  password: 'test123',
+  firstName: 'Luciano',
+  lastname: 'Cuesta',
+  email: 'lcuesta@atenena.com',
+  password: 'Password12345!',
   invalidEmail: 'invalid-email',
   invalidPassword: '123'
 };
